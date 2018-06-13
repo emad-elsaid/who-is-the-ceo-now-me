@@ -68,6 +68,39 @@
       </div>
     </section>
 
+    <script type="text/x-template" id="message-template">
+      <div v-bind:class="[ classAttr() ]">
+        {{ message }}
+      </div>
+    </script>
+
+    <script type="text/x-template" id="branch-template">
+      <div class="box">
+        Rent: {{ rent }} EGP <br>
+
+        Internet Lines:
+        <div class="select">
+          <select v-model="selectedInternetLine">
+            <option disabled value="">Select Internet Package</option>
+            <option v-for="internetPackage in internetPackages" v-bind:value="internetPackage"> {{ internetPackage.name }} ({{ internetPackage.speed}} Kb) for {{internetPackage.cost}} EGP/Month</option>
+          </select>
+        </div>
+        <button class="button" v-on:click="newInternet()"> Add Line</button>
+        <table class="table is-fullwidth">
+          <tr>
+            <th>Line Name</th>
+            <th>Speed</th>
+            <th>Cost</th>
+          </tr>
+          <tr v-for="internetLine in internet">
+            <td> {{ internetLine.name }} </td>
+            <td> {{ internetLine.speed }} </td>
+            <td> {{ internetLine.cost }} </td>
+          </tr>
+        </table>
+      </div>
+    </script>
+
     <script src="js/internet.js"></script>
     <script src="js/branch.js"></script>
     <script src="js/events.js"></script>

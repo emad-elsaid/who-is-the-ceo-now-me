@@ -61,10 +61,9 @@ var perDay = function() {
 }
 
 var perMonth = function() {
-  payRent()
-  payInternet()
-  payElectricity()
-  payWater()
+  app.branches.forEach(function(branch){
+    app.balance -= branch.expenses
+  })
 }
 
 var perQuarter = function() {
@@ -76,24 +75,4 @@ var perYear = function() {
     branch.rent = Math.floor(branch.rent * (1 + app.inflation))
   })
   message('info', `Branches rent increased ${app.inflation * 100}% to adjust for inflation`)
-}
-
-var payRent = function() {
-  app.branches.forEach(function(branch){
-    app.balance -= branch.rent
-  })
-}
-
-var payInternet = function() {
-  app.branches.forEach(function(branch){
-    app.balance -= branch.internetRent()
-  })
-}
-
-var payElectricity = function() {
-
-}
-
-var payWater = function() {
-
 }

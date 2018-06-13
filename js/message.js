@@ -1,10 +1,6 @@
 Vue.component('company-message', {
   props: ['type', 'message'],
-  template: `
-<div v-bind:class="[ classAttr() ]">
-    {{ message }}
-</div>
-`,
+  template: '#message-template',
   methods: {
     classAttr() {
       return "notification is-" + this.type
