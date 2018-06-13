@@ -24,14 +24,14 @@
                 <div class="card-content" >
                   <i class="fas fa-money-bill"></i> Balance: {{ balance }} EGP<br>
                   <i class="fas fa-calendar-alt"></i> Founded since: {{ lifeTime() }} <br>
-                  <i class="fas fa-home"></i> Branches: {{ branches.length }} for {{ rent() }} EGP <br>
+                  <i class="fas fa-home"></i> Branches: {{ branches.length }} for {{ rent() }} EGP, New rents require {{ rentInsuranceMonths }} months insurance <br>
                   <i class="fas fa-arrow-alt-circle-up"></i> Economy Inflation: {{ inflation * 100 }}%
                 </div>
               </div>
 
               <div class="card">
                 <div class="card-header">
-                  <div class="card-header-title"> Branches </div>
+                  <div class="card-header-title"> Branches ({{ branches.length }}) </div>
                 </div>
                 <div class="card-content">
                   <company-branch
@@ -39,6 +39,9 @@
                       v-bind:rent="branch.rent">
                   </company-branch>
                 </div>
+                <footer class="card-footer">
+                  <a href="#" v-on:click="openBranch()" class="card-footer-item">New Branch ({{ newBranchCost }} EGP)</a>
+                </footer>
               </div>
             </div>
 

@@ -6,8 +6,17 @@ var app = new Vue({
     balance: 100000,
     days: 0,
     inflation: 0.1,
+    rentInsuranceMonths: 3,
     branches: [new Branch()],
     messages: []
+  },
+  computed: {
+    newBranchCost: function() {
+      var branch = new Branch()
+      var rent = branch.rent
+      var insurance = rent * this.rentInsuranceMonths
+      return rent + insurance
+    }
   },
   methods: {
     rent: function() {
@@ -26,6 +35,10 @@ var app = new Vue({
       } else {
         return `${years} years and ${days} days`
       }
+    },
+    openBranch: function() {
+      this.branches.push(new Branch())
+      this.balance -= this.newBranchCost
     }
   }
 })
