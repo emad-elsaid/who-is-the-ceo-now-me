@@ -7,7 +7,7 @@ var app = new Vue({
     days: 0,
     inflation: 0.1,
     rentInsuranceMonths: 3,
-    branches: [new Branch()],
+    branches: [],
     messages: []
   },
   computed: {
