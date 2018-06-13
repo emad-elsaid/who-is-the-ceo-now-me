@@ -54,7 +54,7 @@ var iteration = function() {
   if ( app.days % 365 == 0 ) { perYear() }
   events()
 }
-var iterationInterval = setInterval(iteration, 10)
+var iterationInterval = setInterval(iteration, 1000)
 
 var perDay = function() {
 
@@ -62,6 +62,9 @@ var perDay = function() {
 
 var perMonth = function() {
   payRent()
+  payInternet()
+  payElectricity()
+  payWater()
 }
 
 var perQuarter = function() {
@@ -70,7 +73,7 @@ var perQuarter = function() {
 
 var perYear = function() {
   app.branches.forEach(function(branch){
-    branch.rent *= 1 + app.inflation
+    branch.rent = Math.floor(branch.rent * (1 + app.inflation))
   })
   message('info', `Branches rent increased ${app.inflation * 100}% to adjust for inflation`)
 }
@@ -79,4 +82,18 @@ var payRent = function() {
   app.branches.forEach(function(branch){
     app.balance -= branch.rent
   })
+}
+
+var payInternet = function() {
+  app.branches.forEach(function(branch){
+    app.balance -= branch.internetRent()
+  })
+}
+
+var payElectricity = function() {
+
+}
+
+var payWater = function() {
+
 }
