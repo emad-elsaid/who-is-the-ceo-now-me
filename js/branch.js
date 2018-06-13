@@ -30,7 +30,7 @@ var Branch = class {
   }
 
   expenses() {
-    return rent + internetRent() + electricityBill() + waterBill()
+    return this.rent + this.internetRent() + this.electricityBill() + this.waterBill()
   }
 
   internetRent() {

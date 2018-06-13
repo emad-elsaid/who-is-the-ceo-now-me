@@ -62,7 +62,7 @@ var perDay = function() {
 
 var perMonth = function() {
   app.branches.forEach(function(branch){
-    app.balance -= branch.expenses
+    app.balance -= branch.expenses()
   })
 }
 
