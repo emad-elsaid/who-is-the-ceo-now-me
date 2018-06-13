@@ -16,9 +16,7 @@ var app = new Vue({
       var rent = branch.rent
       var insurance = rent * this.rentInsuranceMonths
       return rent + insurance
-    }
-  },
-  methods: {
+    },
     rent: function() {
       var sum = 0
       this.branches.forEach( function(b) { sum += b.rent } )
@@ -29,16 +27,21 @@ var app = new Vue({
       var days = this.days % 365
 
       if ( years == 0 ){
-       return `${days} days`
+        return `${days} days`
       } else if ( days == 0 ) {
         return `${years} years`
       } else {
         return `${years} years and ${days} days`
       }
     },
+  },
+  methods: {
     openBranch: function() {
       this.branches.push(new Branch())
       this.balance -= this.newBranchCost
+    },
+    isBankrupt: function() {
+      return this.balance <= 0
     }
   }
 })

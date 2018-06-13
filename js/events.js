@@ -1,8 +1,8 @@
 var eventsList = [
   function() {
-    if ( app.balance <= 0 ) {
+    if ( app.isBankrupt() ) {
       clearInterval(iterationInterval)
-      message('danger', `You went bankrupt after ${app.lifeTime()}`)
+      message('danger', `You went bankrupt after ${app.lifeTime}`)
     }
   },
   function() {
