@@ -21,11 +21,11 @@ var Branch = class {
     this.waterLiterPrice = 0.60
     this.internet = []
     this.internetPackages = [
-      new Internet('TEData 1Mb', 1024, 100),
-      new Internet('TEData 2Mb', 1024 * 2, 200),
-      new Internet('TEData 4Mb', 1024 * 4, 400),
-      new Internet('TEData 8Mb', 1024 * 8, 800),
-      new Internet('TEData 16Mb', 1024 * 16, 1200)
+      new Internet('WE upto 5Mb', 1024 * 5, 110),
+      new Internet('WE upto 15Mb', 1024 * 15, 150),
+      new Internet('WE upto 25Mb', 1024 * 25, 200),
+      new Internet('WE upto 50Mb', 1024 * 25, 250),
+      new Internet('WE upto 100Mb', 1024 * 100, 300)
     ]
   }
 
