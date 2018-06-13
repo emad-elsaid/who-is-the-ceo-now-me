@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Software House Simulator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <section id="app" class="section">
+      <div class="container">
+        <h1 class="title">
+          {{ title }}
+        </h1>
+        <p class="subtitle"> {{ subtitle }} </p>
+
+        <div class="container">
+          <div class="columns">
+
+            <div class="column">
+              <div class="card">
+                <div class="card-content" >
+                  <i class="fas fa-money-bill"></i> Balance: {{ balance }} EGP<br>
+                  <i class="fas fa-calendar-alt"></i> Founded since: {{ lifeTime() }} <br>
+                  <i class="fas fa-home"></i> Branches: {{ branches.length }} for {{ rent() }} EGP <br>
+                  <i class="fas fa-arrow-alt-circle-up"></i> Economy Inflation: {{ inflation * 100 }}%
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-header-title"> Branches </div>
+                </div>
+                <div class="card-content">
+                  <company-branch
+                      v-for="branch in branches"
+                      v-bind:rent="branch.rent">
+                  </company-branch>
+                </div>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-header-title"> Messages </div>
+                </div>
+                <div class="card-content">
+                  <company-message
+                      v-for="message in messages"
+                      v-bind:type="message.type"
+                      v-bind:message="message.message">
+                  </company-message>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <script src="js/branch.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/message.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
