@@ -1,14 +1,16 @@
 Vue.component('company-branch', {
-  props: ['rent', 'internet', 'internet-packages'],
+  template: '#branch-template',
+  props: ['branch'],
+
   data: function() {
     return {
       selectedInternetLine: ''
     }
   },
-  template: '#branch-template',
+
   methods: {
     newInternet: function() {
-      this.internet.push(this.selectedInternetLine)
+      this.branch.internet.push(this.selectedInternetLine)
     }
   }
 })

@@ -1,7 +1,7 @@
 Vue.component('company-message', {
-  props: ['type', 'message'],
+  props: ['type', 'message', 'day'],
   template: '#message-template',
-  methods: {
+  computed: {
     classAttr() {
       return "notification is-" + this.type
     }
@@ -12,6 +12,7 @@ var Message = class {
   constructor(type, message) {
     this.type = type
     this.message = message
+    this.day = app.days
   }
 
 }

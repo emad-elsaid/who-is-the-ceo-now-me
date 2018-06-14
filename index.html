@@ -10,58 +10,56 @@
   </head>
   <body>
     <section id="app" class="section">
-      <div class="container">
-        <h1 class="title">
-          {{ title }}
-        </h1>
-        <p class="subtitle"> {{ subtitle }} </p>
+      <h1 class="title">
+        {{ title }}
+      </h1>
+      <p class="subtitle"> {{ subtitle }} </p>
 
-        <div class="container">
-          <div class="columns">
+      <div class="columns">
 
-            <div class="column">
-              <div class="card">
-                <div class="card-content" >
-                  <i class="fas fa-money-bill"></i> Balance: {{ balance }} EGP<br>
-                  <i class="fas fa-calendar-alt"></i> Founded since: {{ lifeTime }} <br>
-                  <i class="fas fa-home"></i> Branches: {{ branches.length }} for {{ rent }} EGP, New rents require {{ rentInsuranceMonths }} months insurance <br>
-                  <i class="fas fa-arrow-alt-circle-up"></i> Economy Inflation: {{ inflation * 100 }}%
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header">
-                  <div class="card-header-title"> Branches ({{ branches.length }}) </div>
-                </div>
-                <div class="card-content">
-                  <company-branch
-                      v-for="branch in branches"
-                      v-bind:rent="branch.rent"
-                      v-bind:internet="branch.internet"
-                      v-bind:internet-packages="branch.internetPackages">
-                  </company-branch>
-                </div>
-                <footer class="card-footer">
-                  <a href="#" v-on:click="openBranch()" class="card-footer-item">New Branch ({{ newBranchCost }} EGP)</a>
-                </footer>
-              </div>
+        <div class="column">
+          <div class="card">
+            <div class="card-content" >
+              <i class="fas fa-money-bill"></i> Balance: {{ balance }} EGP<br>
+              <i class="fas fa-calendar-alt"></i> Founded since: {{ lifeTime }} <br>
+              <i class="fas fa-home"></i> Branches: {{ branches.length }} for {{ rent }} EGP, New rents require {{ rentInsuranceMonths }} months insurance <br>
+              <i class="fas fa-arrow-alt-circle-up"></i> Economy Inflation: {{ inflation * 100 }}%
             </div>
+          </div>
 
-            <div class="column">
-              <div class="card">
-                <div class="card-header">
-                  <div class="card-header-title"> Messages </div>
-                </div>
-                <div class="card-content">
-                  <company-message
-                      v-for="message in messages"
-                      v-bind:type="message.type"
-                      v-bind:message="message.message">
-                  </company-message>
-                </div>
-              </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-title"> Branches ({{ branches.length }}) </div>
             </div>
+            <div class="card-content">
+              <div class="notification is-danger" v-if="! branches.length">You don't have any branches for your company yet, creating a branch opens up vacancies</div>
+              <company-branch
+                  v-for="(branch, index) in branches"
+                  v-bind:key="index"
+                  v-bind:branch="branch"
+                  v-on:remove="branches.splice(index, 1)">
+              </company-branch>
+            </div>
+            <footer class="card-footer">
+              <a href="#" v-on:click.prevent="openBranch()" class="card-footer-item">New Branch ({{ newBranchCost }} EGP)</a>
+            </footer>
+          </div>
+        </div>
 
+        <div class="column">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-title"> Messages </div>
+            </div>
+            <div class="card-content">
+              <company-message
+                  v-for="(message, index) in messages"
+                  v-bind:key="index"
+                  v-bind:type="message.type"
+                  v-bind:day="message.day"
+                  v-bind:message="message.message">
+              </company-message>
+            </div>
           </div>
         </div>
 
@@ -69,29 +67,37 @@
     </section>
 
     <script type="text/x-template" id="message-template">
-      <div v-bind:class="[ classAttr() ]">
+      <div v-bind:class="[ classAttr ]">
+        <span class="tag is-white">Day {{ day }}</span>
         {{ message }}
       </div>
     </script>
 
     <script type="text/x-template" id="branch-template">
       <div class="box">
-        Rent: {{ rent }} EGP <br>
+        <a class="delete is-pulled-right" v-on:click.prevent="$emit('remove')"></a>
+        Rent: {{ branch.rent }} EGP <br>
+        Internet: {{ branch.internetRent() }} EGP <br>
+        Electricity: {{ branch.electricityBill() }} EGP <br>
+        Water: {{ branch.waterBill() }} EGP <br>
 
         <div class="select">
           <select v-model="selectedInternetLine">
             <option disabled value="">Select Internet Package</option>
-            <option v-for="internetPackage in internetPackages" v-bind:value="internetPackage"> {{ internetPackage.name }} ({{ internetPackage.speed}} Kb) for {{internetPackage.cost}} EGP/Month</option>
+            <option v-for="internetPackage in branch.internetPackages" v-bind:value="internetPackage">
+              {{ internetPackage.name }} ({{ internetPackage.speed}} Kb)
+              for {{internetPackage.cost}} EGP/Month
+            </option>
           </select>
         </div>
-        <button class="button" v-on:click="newInternet()"> Add Line</button>
+        <button class="button" v-on:click.prevent="newInternet()"> Add Line</button>
         <table class="table is-fullwidth">
           <tr>
             <th>Line Name</th>
             <th>Speed</th>
             <th>Cost</th>
           </tr>
-          <tr v-for="internetLine in internet">
+          <tr v-for="internetLine in branch.internet">
             <td> {{ internetLine.name }} </td>
             <td> {{ internetLine.speed }} </td>
             <td> {{ internetLine.cost }} </td>

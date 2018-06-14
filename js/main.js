@@ -54,16 +54,22 @@ var iteration = function() {
   if ( app.days % 365 == 0 ) { perYear() }
   events()
 }
-var iterationInterval = setInterval(iteration, 1000)
+var iterationInterval = setInterval(iteration, 100)
 
 var perDay = function() {
 
 }
 
 var perMonth = function() {
+  var expenses = 0
   app.branches.forEach(function(branch){
-    app.balance -= branch.expenses()
+    expenses += branch.expenses()
   })
+  app.balance -= expenses
+
+  if ( expenses > 0 ) {
+    message('info', `We paid the ${app.branches.length} branches expenses ${expenses}, new balance ${app.balance}`)
+  }
 }
 
 var perQuarter = function() {
