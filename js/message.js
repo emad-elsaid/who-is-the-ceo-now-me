@@ -14,11 +14,11 @@ var Message = class {
   constructor(type, message) {
     this.type = type
     this.message = message
-    this.day = app.days
+    this.day = company.days
   }
 
 }
 
 var message = function(type, msg) {
-  app.messages.unshift( new Message(type, msg) )
+  company.messages.unshift( new Message(type, msg) )
 }

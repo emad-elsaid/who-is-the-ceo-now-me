@@ -1,12 +1,12 @@
 var eventsList = [
   function() {
-    if ( app.isBankrupt() ) {
+    if ( company.isBankrupt() ) {
       clearInterval(iterationInterval)
-      message('danger', `You went bankrupt after ${app.lifeTime}`)
+      message('danger', `You went bankrupt after ${company.lifeTime}`)
     }
   },
   function() {
-    if ( app.days == 1 ) {
+    if ( company.days == 1 ) {
       message('info', "Congrates on founding your company! ")
     }
   }

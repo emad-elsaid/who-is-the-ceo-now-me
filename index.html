@@ -47,6 +47,10 @@
         </div>
 
         <div class="column">
+          <company-ledger v-bind:ledger="ledger"></company-ledger>
+        </div>
+
+        <div class="column">
           <div class="card">
             <div class="card-header">
               <div class="card-header-title"> Messages </div>
@@ -104,10 +108,32 @@
       </div>
     </script>
 
+    <script type="text/x-template" id="ledger-template">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-title"> Ledger </div>
+        </div>
+        <div class="card-content">
+          <table class="table is-fullwidth">
+            <tr>
+              <th> Label </th>
+              <th> Payment </th>
+            </tr>
+            <tr v-for="transaction in ledger.transactions">
+              <td> {{ transaction.label }} </td>
+              <td> {{ transaction.payment }} </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </script>
+
     <script src="js/internet.js"></script>
     <script src="js/branch.js"></script>
     <script src="js/events.js"></script>
     <script src="js/message.js"></script>
+    <script src="js/ledger.js"></script>
+    <script src="js/company.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
