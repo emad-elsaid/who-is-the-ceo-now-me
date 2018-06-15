@@ -28,7 +28,7 @@ var perQuarter = function() {
 }
 
 var perYear = function() {
-  if ( company.balance.length == 0 ) { return }
+  if ( company.branches.length == 0 ) { return }
 
   company.branches.forEach(function(branch){
     branch.rent = Math.floor(branch.rent * (1 + company.inflation))
