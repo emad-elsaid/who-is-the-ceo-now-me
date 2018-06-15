@@ -93,17 +93,21 @@
           </select>
         </div>
         <button class="button" v-on:click.prevent="newInternet()"> Add Line</button>
-        <table class="table is-fullwidth">
-          <tr>
-            <th>Line Name</th>
-            <th>Speed</th>
-            <th>Cost</th>
-          </tr>
-          <tr v-for="internetLine in branch.internet">
-            <td> {{ internetLine.name }} </td>
-            <td> {{ internetLine.speed }} </td>
-            <td> {{ internetLine.cost }} </td>
-          </tr>
+        <table class="table is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Line Name</th>
+              <th>Speed</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="internetLine in branch.internet">
+              <td> {{ internetLine.name }} </td>
+              <td> {{ internetLine.speed }} </td>
+              <td> {{ internetLine.cost }} </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </script>
@@ -114,15 +118,19 @@
           <div class="card-header-title"> Ledger </div>
         </div>
         <div class="card-content">
-          <table class="table is-fullwidth">
-            <tr>
-              <th> Label </th>
-              <th> Payment </th>
-            </tr>
-            <tr v-for="transaction in ledger.transactions">
-              <td> {{ transaction.label }} </td>
-              <td> {{ transaction.payment }} </td>
-            </tr>
+          <table class="table is-hoverable is-striped is-fullwidth">
+            <thead>
+              <tr>
+                <th> Label </th>
+                <th> Payment </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="transaction in ledger.transactions">
+                <td> {{ transaction.label }} </td>
+                <td> {{ transaction.payment }} </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
