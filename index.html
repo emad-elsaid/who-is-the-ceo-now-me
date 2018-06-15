@@ -55,9 +55,7 @@
               <company-message
                   v-for="(message, index) in messages"
                   v-bind:key="index"
-                  v-bind:type="message.type"
-                  v-bind:day="message.day"
-                  v-bind:message="message.message">
+                  v-bind:message="message">
               </company-message>
             </div>
           </div>
@@ -68,8 +66,8 @@
 
     <script type="text/x-template" id="message-template">
       <div v-bind:class="[ classAttr ]">
-        <span class="tag is-white">Day {{ day }}</span>
-        {{ message }}
+        <span class="tag is-white">Day {{ message.day }}</span>
+        {{ message.message }}
       </div>
     </script>
 

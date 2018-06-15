@@ -1,6 +1,8 @@
 Vue.component('company-branch', {
   template: '#branch-template',
-  props: ['branch'],
+  props: {
+    branch: Branch
+  },
 
   data: function() {
     return {

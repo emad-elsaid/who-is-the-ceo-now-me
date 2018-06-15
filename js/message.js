@@ -1,9 +1,11 @@
 Vue.component('company-message', {
-  props: ['type', 'message', 'day'],
   template: '#message-template',
+  props: {
+    message: Message
+  },
   computed: {
     classAttr() {
-      return "notification is-" + this.type
+      return "notification is-" + this.message.type
     }
   }
 })

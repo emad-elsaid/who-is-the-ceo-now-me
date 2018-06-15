@@ -77,6 +77,8 @@ var perQuarter = function() {
 }
 
 var perYear = function() {
+  if ( app.balance.length == 0 ) { return }
+
   app.branches.forEach(function(branch){
     branch.rent = Math.floor(branch.rent * (1 + app.inflation))
   })
