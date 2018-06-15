@@ -86,13 +86,13 @@
         <div class="select">
           <select v-model="selectedInternetLine">
             <option disabled value="">Select Internet Package</option>
-            <option v-for="internetPackage in branch.internetPackages" v-bind:value="internetPackage">
+            <option v-for="internetPackage in internetPackages" v-bind:value="internetPackage">
               {{ internetPackage.name }} ({{ internetPackage.speed}} Kb)
               for {{internetPackage.cost}} EGP/Month
             </option>
           </select>
         </div>
-        <button class="button" v-on:click.prevent="newInternet()"> Add Line</button>
+        <button class="button" v-on:click.prevent="newInternet()" v-if="selectedInternetLine !== '' "> Add Line</button>
         <table class="table is-striped is-hoverable is-fullwidth">
           <thead>
             <tr>

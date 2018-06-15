@@ -6,7 +6,8 @@ Vue.component('company-branch', {
 
   data: function() {
     return {
-      selectedInternetLine: ''
+      selectedInternetLine: '',
+      internetPackages: internetPackages
     }
   },
 
@@ -24,13 +25,6 @@ var Branch = class {
     this.kilowattPrice = 0.60
     this.waterLiterPrice = 0.60
     this.internet = []
-    this.internetPackages = [
-      new Internet('WE upto 5Mb', 1024 * 5, 110),
-      new Internet('WE upto 15Mb', 1024 * 15, 150),
-      new Internet('WE upto 25Mb', 1024 * 25, 200),
-      new Internet('WE upto 50Mb', 1024 * 25, 250),
-      new Internet('WE upto 100Mb', 1024 * 100, 300)
-    ]
   }
 
   expenses() {
