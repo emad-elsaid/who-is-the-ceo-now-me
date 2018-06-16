@@ -14,6 +14,7 @@ Vue.component('company-branch', {
   created: function() {
     company.$on('month', this.payExpenses)
     company.$on('year', this.adjustToInflation)
+    this.payCreationFees()
   },
 
   beforeDestroy: function() {
@@ -22,6 +23,12 @@ Vue.component('company-branch', {
   },
 
   methods: {
+    payCreationFees: function() {
+      var rent = this.branch.rent
+      var insurance = rent * company.rentInsuranceMonths
+      var fees = rent + insurance
+      company.ledger.add(new Transaction('New branch', -1 * fees))
+    },
     newInternet: function() {
       this.branch.internet.push(this.selectedInternetLine)
     },

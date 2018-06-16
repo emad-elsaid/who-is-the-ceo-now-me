@@ -72,7 +72,6 @@ var company = new Vue({
     },
     openBranch: function() {
       this.branches.push(new Branch())
-      this.balance -= this.newBranchCost
       this.open()
     },
     isBankrupt: function() {

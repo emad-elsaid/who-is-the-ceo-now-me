@@ -14,7 +14,7 @@ Vue.component('company-internet', {
 
   methods: {
     pay: function() {
-      company.ledger.add(new Transaction('Internet expenses', -1 * this.internet.cost))
+      company.ledger.add(new Transaction(this.internet.name, -1 * this.internet.cost))
     }
   }
 })
