@@ -2,6 +2,7 @@ var Transaction = class {
   constructor(label, payment) {
     this.label = label
     this.payment = payment
+    this.days = company.days
   }
 }
 

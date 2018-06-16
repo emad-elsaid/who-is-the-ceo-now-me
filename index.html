@@ -32,7 +32,7 @@
               <div class="card-header-title"> <i class="fa fa-sitemap"></i> &nbsp; Branches ({{ branches.length }}) </div>
             </div>
             <div class="card-content">
-              <div class="notification is-danger" v-if="! branches.length">You don't have any branches for your company yet, creating a branch opens up vacancies</div>
+              <div class="notification" v-if="! branches.length">You don't have any branches for your company yet, creating a branch opens up vacancies</div>
               <company-branch
                   v-for="(branch, index) in branches"
                   v-bind:key="index"
@@ -56,6 +56,7 @@
               <div class="card-header-title"> <i class="fa fa-inbox"></i> &nbsp; Messages </div>
             </div>
             <div class="card-content">
+              <div class="notification" v-if="messages.length == 0">You don't have any messages.</div>
               <company-message
                   v-for="(message, index) in messages"
                   v-bind:key="index"
@@ -121,28 +122,28 @@
           <table class="table is-hoverable is-striped is-fullwidth" v-if="ledger.transactions.length">
             <thead>
               <tr>
+                <th> Time </th>
                 <th> Label </th>
                 <th> Payment </th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="transaction in ledger.transactions">
+                <td> {{ transaction.days }} days </td>
                 <td> {{ transaction.label }} </td>
                 <td> {{ transaction.payment }} </td>
               </tr>
             </tbody>
           </table>
-          <div class="notification is-info" v-else> You have no transactions. </div>
+          <div class="notification" v-else> You have no transactions. </div>
         </div>
       </div>
     </script>
 
     <script src="js/internet.js"></script>
     <script src="js/branch.js"></script>
-    <script src="js/events.js"></script>
     <script src="js/message.js"></script>
     <script src="js/ledger.js"></script>
     <script src="js/company.js"></script>
-    <script src="js/main.js"></script>
   </body>
 </html>

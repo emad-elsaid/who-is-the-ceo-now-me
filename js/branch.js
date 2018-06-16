@@ -11,9 +11,26 @@ Vue.component('company-branch', {
     }
   },
 
+  created: function() {
+    company.$on('month', this.payExpenses)
+    company.$on('year', this.adjustToInflation)
+  },
+
+  beforeDestroy: function() {
+    company.$off('month', this.payExpenses)
+    company.$off('year', this.adjustToInflation)
+  },
+
   methods: {
     newInternet: function() {
       this.branch.internet.push(this.selectedInternetLine)
+    },
+    payExpenses: function() {
+      company.ledger.add(new Transaction('Branch expenses', -1 * this.branch.expenses()))
+    },
+    adjustToInflation: function() {
+      this.branch.rent = Math.floor(this.branch.rent * (1 + company.inflation))
+      message('info', `Branch rent increased to ${this.branch.rent} (${company.inflation * 100}%) to adjust for inflation`)
     }
   }
 })
