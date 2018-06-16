@@ -32,7 +32,7 @@
               <div class="card-header-title"> <i class="fa fa-sitemap"></i> &nbsp; Branches ({{ branches.length }}) </div>
             </div>
             <div class="card-content">
-              <div class="notification" v-if="! branches.length">You don't have any branches for your company yet, creating a branch opens up vacancies</div>
+              <div class="notification has-text-centered" v-if="! branches.length">You don't have any branches for your company yet, creating a branch opens up vacancies</div>
               <company-branch
                   v-for="(branch, index) in branches"
                   v-bind:key="index"
@@ -56,7 +56,7 @@
               <div class="card-header-title"> <i class="fa fa-inbox"></i> &nbsp; Messages </div>
             </div>
             <div class="card-content">
-              <div class="notification" v-if="messages.length == 0">You don't have any messages.</div>
+              <div class="notification has-text-centered" v-if="messages.length == 0">You don't have any messages.</div>
               <company-message
                   v-for="(message, index) in messages"
                   v-bind:key="index"
@@ -105,6 +105,28 @@
             <company-internet v-for="(internetLine, index) in branch.internet" v-bind:key="index" v-bind:internet="internetLine"> </company-internet>
           </tbody>
         </table>
+
+        <div class="select">
+          <select v-model="selectedPerson">
+            <option disabled value="">Select Person</option>
+            <option v-for="person in peoplePositions" v-bind:value="person">
+              {{ person.position }} ({{ person.salary}} EGP)
+            </option>
+          </select>
+        </div>
+        <button class="button" v-on:click.prevent="newPerson()" v-if="selectedPerson !== '' ">Add Person</button>
+        <table class="table is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Salary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <company-person v-for="(person, index) in branch.people" v-bind:key="index" v-bind:person="person"> </company-person>
+          </tbody>
+        </table>
+
       </div>
     </script>
 
@@ -130,7 +152,7 @@
               </tr>
             </tbody>
           </table>
-          <div class="notification" v-else> You have no transactions. </div>
+          <div class="notification has-text-centered" v-else> You have no transactions. </div>
         </div>
       </div>
     </script>
@@ -143,10 +165,18 @@
       </tr>
     </script>
 
+    <script type="text/x-template"  id="person-template">
+      <tr>
+        <td> {{ person.position }} </td>
+        <td> {{ person.salary }} </td>
+      </tr>
+    </script>
+
     <script src="js/internet.js"></script>
     <script src="js/branch.js"></script>
     <script src="js/message.js"></script>
     <script src="js/ledger.js"></script>
+    <script src="js/people.js"></script>
     <script src="js/company.js"></script>
   </body>
 </html>

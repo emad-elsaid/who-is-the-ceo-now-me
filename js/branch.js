@@ -7,7 +7,9 @@ Vue.component('company-branch', {
   data: function() {
     return {
       selectedInternetLine: '',
-      internetPackages: internetPackages
+      internetPackages: internetPackages,
+      selectedPerson: '',
+      peoplePositions: people
     }
   },
 
@@ -31,6 +33,9 @@ Vue.component('company-branch', {
     },
     newInternet: function() {
       this.branch.internet.push(this.selectedInternetLine)
+    },
+    newPerson: function() {
+      this.branch.people.push(this.selectedPerson)
     },
     payExpenses: function() {
       company.ledger.add(new Transaction('Branch expenses', -1 * this.branch.expenses()))
