@@ -45,16 +45,7 @@ var Branch = class {
   }
 
   expenses() {
-    return this.rent + this.internetRent() + this.electricityBill() + this.waterBill()
-  }
-
-  internetRent() {
-    var sum = 0
-    this.internet.forEach(function(internet){
-      sum += internet.cost
-    })
-
-    return sum
+    return this.rent + this.electricityBill() + this.waterBill()
   }
 
   electricityBill() {

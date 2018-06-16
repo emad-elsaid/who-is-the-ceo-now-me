@@ -1,3 +1,24 @@
+Vue.component('company-internet', {
+  template: '#internet-template',
+  props: {
+    internet: Internet
+  },
+
+  created: function() {
+    company.$on('month', this.pay)
+  },
+
+  beforeDestroy: function() {
+    company.$off('month', this.pay)
+  },
+
+  methods: {
+    pay: function() {
+      company.ledger.add(new Transaction('Internet expenses', -1 * this.internet.cost))
+    }
+  }
+})
+
 var Internet = class {
   constructor(name, speed, cost) {
     this.name = name

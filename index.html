@@ -80,7 +80,6 @@
       <div class="box">
         <a class="delete is-pulled-right" v-on:click.prevent="$emit('remove')"></a>
         Rent: {{ branch.rent }} EGP <br>
-        Internet: {{ branch.internetRent() }} EGP <br>
         Electricity: {{ branch.electricityBill() }} EGP <br>
         Water: {{ branch.waterBill() }} EGP <br>
 
@@ -103,11 +102,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="internetLine in branch.internet">
-              <td> {{ internetLine.name }} </td>
-              <td> {{ internetLine.speed }} </td>
-              <td> {{ internetLine.cost }} </td>
-            </tr>
+            <company-internet v-for="(internetLine, index) in branch.internet" v-bind:key="index" v-bind:internet="internetLine"> </company-internet>
           </tbody>
         </table>
       </div>
@@ -138,6 +133,14 @@
           <div class="notification" v-else> You have no transactions. </div>
         </div>
       </div>
+    </script>
+
+    <script type="text/x-template" id="internet-template">
+      <tr>
+        <td> {{ internet.name }} </td>
+        <td> {{ internet.speed }} </td>
+        <td> {{ internet.cost }} </td>
+      </tr>
     </script>
 
     <script src="js/internet.js"></script>
