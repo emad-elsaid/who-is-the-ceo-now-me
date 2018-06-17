@@ -40,9 +40,33 @@
                   v-on:remove="branches.splice(index, 1)">
               </company-branch>
             </div>
-            <footer class="card-footer">
+            <footer class="card-footer" v-if="newBranchCost <= balance">
               <a href="#" v-on:click.prevent="openBranch()" class="card-footer-item">New Branch ({{ newBranchCost }} EGP)</a>
             </footer>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-title"> <i class="fa fa-tasks"></i> &nbsp; Projects ({{ projects.length }}) </div>
+            </div>
+            <div class="card-content">
+              <div class="notification has-text-centered" v-if="! projects.length">You don't have any projects</div>
+              <table class="table is-fullwidth is-striped is-hoverable" v-else>
+                <thead>
+                  <tr>
+                    <th> Effort </th>
+                    <th> Revenue </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr is="company-project"
+                      v-for="(project, index) in projects"
+                      v-bind:key="index"
+                      v-bind:project="project">
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
@@ -92,7 +116,7 @@
             </option>
           </select>
         </div>
-        <button class="button" v-on:click.prevent="newInternet()" v-if="selectedInternetLine !== '' "> Add Line</button>
+        <button class="button" v-on:click.prevent="newInternet()" v-if="selectedInternetLine !== '' "> Add Line </button>
         <table class="table is-striped is-hoverable is-fullwidth">
           <thead>
             <tr>
@@ -165,10 +189,17 @@
       </tr>
     </script>
 
-    <script type="text/x-template"  id="person-template">
+    <script type="text/x-template" id="person-template">
       <tr>
         <td> {{ person.position }} </td>
         <td> {{ person.salary }} </td>
+      </tr>
+    </script>
+
+    <script type="text/x-template" id="project-template">
+      <tr>
+        <td> {{ project.effort }}/{{ project.goalEffort }} </td>
+        <td> {{ project.revenue }} EGP </td>
       </tr>
     </script>
 
@@ -177,6 +208,7 @@
     <script src="js/message.js"></script>
     <script src="js/ledger.js"></script>
     <script src="js/people.js"></script>
+    <script src="js/project.js"></script>
     <script src="js/company.js"></script>
   </body>
 </html>

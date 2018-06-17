@@ -10,6 +10,7 @@ var company = new Vue({
     rentInsuranceMonths: 3,
     branches: [],
     messages: [],
+    projects: [],
     ledger: new Ledger(),
     iterationInterval: null
   },
