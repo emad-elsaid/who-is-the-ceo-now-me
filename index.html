@@ -21,9 +21,9 @@
         <div class="column">
           <div class="card">
             <div class="card-content" >
-              <i class="fas fa-money-bill"></i> Balance: {{ balance }} EGP<br>
+              <i class="fas fa-money-bill"></i> Balance: <money-f v-bind:money="balance"></money-f> <br>
               <i class="fas fa-calendar-alt"></i> Founded since: {{ lifeTime }} <br>
-              <i class="fas fa-home"></i> Branches: {{ branches.length }} for {{ rent }} EGP, New rents require {{ rentInsuranceMonths }} months insurance <br>
+              <i class="fas fa-home"></i> Branches: {{ branches.length }} for <money-f v-bind:money="rent"></money-f>, New rents require {{ rentInsuranceMonths }} months insurance <br>
               <i class="fas fa-arrow-alt-circle-up"></i> Economy Inflation: {{ inflation * 100 }}%
             </div>
           </div>
@@ -42,7 +42,7 @@
               </company-branch>
             </div>
             <footer class="card-footer" v-if="newBranchCost <= balance">
-              <a href="#" v-on:click.prevent="openBranch()" class="card-footer-item">New Branch ({{ newBranchCost }} EGP)</a>
+              <a href="#" v-on:click.prevent="openBranch()" class="card-footer-item">New Branch (<money-f v-bind:money="newBranchCost"></money-f>)</a>
             </footer>
           </div>
 
@@ -104,9 +104,9 @@
     <script type="text/x-template" id="branch-template">
       <div class="box">
         <a class="delete is-pulled-right" v-on:click.prevent="$emit('remove')"></a>
-        Rent: {{ branch.rent }} EGP <br>
-        Electricity: {{ branch.electricityBill() }} EGP <br>
-        Water: {{ branch.waterBill() }} EGP <br>
+        Rent: <money-f v-bind:money="branch.rent"></money-f> <br>
+        Electricity: <money-f v-bind:money="branch.electricityBill()"></money-f> <br>
+        Water: <money-f v-bind:money="branch.waterBill()"></money-f> <br>
 
         <div class="select">
           <select v-model="selectedInternetLine">
@@ -173,7 +173,7 @@
               <tr v-for="transaction in ledger.transactions">
                 <td> {{ transaction.days }} days </td>
                 <td> {{ transaction.label }} </td>
-                <td> {{ transaction.payment }} </td>
+                <td> <money-f v-bind:money="transaction.payment"></money-f> </td>
               </tr>
             </tbody>
           </table>
@@ -186,24 +186,29 @@
       <tr>
         <td> {{ internet.name }} </td>
         <td> {{ internet.speed }} </td>
-        <td> {{ internet.cost }} </td>
+        <td> <money-f v-bind:money="internet.cost"></money-f> </td>
       </tr>
     </script>
 
     <script type="text/x-template" id="person-template">
       <tr>
         <td> {{ person.position }} </td>
-        <td> {{ person.salary }} </td>
+        <td> <money-f v-bind:money="person.salary"></money-f> </td>
       </tr>
     </script>
 
     <script type="text/x-template" id="project-template">
       <tr>
         <td> {{ project.effort }}/{{ project.goalEffort }} </td>
-        <td> {{ project.revenue }} EGP </td>
+        <td> <money-f v-bind:money="project.revenue"></money-f> </td>
       </tr>
     </script>
 
+    <script type="text/x-template" id="money-template">
+      <span>{{ formattedMoney }}</span>
+    </script>
+
+    <script src="js/money-formatter.js"></script>
     <script src="js/internet.js"></script>
     <script src="js/branch.js"></script>
     <script src="js/message.js"></script>
