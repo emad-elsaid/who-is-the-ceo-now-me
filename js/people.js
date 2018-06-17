@@ -78,5 +78,5 @@ var people = [
   new Programmer('Lead Developer', 20000, 5),
   new Programmer('Director of Engineering', 30000, 10),
   new Marketeer('Junior Marketeer', 6000, 0.03, 5, 30),
-  new Marketeer('Senior Marketeer', 6000, 0.06, 20, 90)
+  new Marketeer('Senior Marketeer', 12000, 0.06, 20, 90)
 ]
