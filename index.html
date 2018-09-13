@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta content="img/og_image.png" property="og:image">
-    <title>Software House Simulator</title>
+    <title>- WHO IS THE CEO NOW? - ME</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
     <script src="js/vue.js"></script>
@@ -113,7 +113,7 @@
             <option disabled value="">Select Internet Package</option>
             <option v-for="internetPackage in internetPackages" v-bind:value="internetPackage">
               {{ internetPackage.name }} ({{ internetPackage.speed}} Kb)
-              for {{internetPackage.cost}} EGP/Month
+              for {{internetPackage.cost}} €/Month
             </option>
           </select>
         </div>
@@ -135,7 +135,7 @@
           <select v-model="selectedPerson">
             <option disabled value="">Select Person</option>
             <option v-for="person in peoplePositions" v-bind:value="person">
-              {{ person.position }} ({{ person.salary}} EGP)
+              {{ person.position }} ({{ person.salary}} €)
             </option>
           </select>
         </div>

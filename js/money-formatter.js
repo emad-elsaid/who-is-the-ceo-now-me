@@ -5,7 +5,7 @@ Vue.component('money-f', {
     formattedMoney: function() {
       var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
-        currency: 'EGP'
+        currency: 'EUR'
       });
       return formatter.format(this.money)
     }

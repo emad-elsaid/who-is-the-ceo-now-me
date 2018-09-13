@@ -1,8 +1,8 @@
 var company = new Vue({
   el: '#app',
   data: {
-    title: 'Software House',
-    subtitle: 'Software House Simulator, According to the Egyptian economy',
+    title: 'WHO IS THE CEO NOW? - ME',
+    subtitle: 'Software House Simulator for future CEOs.',
     balance: 100000,
     days: 0,
     daysPerSecond: 3,
